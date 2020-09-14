@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>登录</title>
+    <link th:href="@{/webjars/layui/2.5.6/css/layui.css}" rel="stylesheet"/>
+    <link th:href="@{/css/loginStyle.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="login-main">
+    <header class="layui-elip">用户登录</header>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layadmin-user-login-icon layui-icon layui-icon-username" for="username"></label>
+            <input type="text" id="username" name="username" required lay-verify="required" placeholder="用户名"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-form-item">
+            <label class="layadmin-user-login-icon layui-icon layui-icon-password" for="password"></label>
+            <input type="password" name="password" id="password" required lay-verify="required" placeholder="密码"
+                   autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline login-btn">
+            <button class="layui-btn" lay-submit="login" lay-filter="login">登录</button>
+        </div>
+        <hr/>
+        <p><a href="register.html" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
+    </form>
+</div>
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'jquery'], function () {
+        // 操作对象
+        var form = layui.form;
+        var $ = layui.jquery;
+
+        //提交表单
+        form.on('submit(login)', function (data) {
+
+            var username = $("#username").val();
+            var password = $("#password").val();
+
+            //ajax传递提交数据
+            $.ajax({
+                type: 'post',
+                dataType: 'text',//定义数据的返回类型
+                url: '/login',
+                data: {username: username, password: password},
+                traditional: true,
+                success: function (result) {
+                    console.log(result);
+                    var obj = JSON.parse(result);
+                    console.log(obj);
+                    if (obj.status === 1) {
+                        layer.msg('登录成功', {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）*/
+                        }, function () {
+                            window.parent.location.href = "/main";
+                        });
+                    } else {
+                        layer.msg('登录失败', {
+                            icon: 1,
+                            time: 1000 //2秒关闭（如果不配置，默认是3秒）*/
+                        }, function () {
+                        });
+                    }
+                },
+                error: function (XMLResponse) {
+                    console.log(XMLResponse);
+                }
+            });
+            return false;
+        });
+    });
+</script>
+
+</body>
+</html>

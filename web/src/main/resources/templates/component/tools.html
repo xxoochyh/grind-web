@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://mybatis.org"
+       xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>通用组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/saftySupervisorMap.css}" media="all"/>
+</head>
+<body>
+
+<div class="layui-col-md8" th:fragment="test">'
+    <p>这是引入的片段</p>
+</div>
+
+
+
+<!--公用的查询时间段选择器-->
+<div class="layui-inline layui-row layui-col-space20" th:fragment="timePeriodSelector">
+    <div class="layui-row" style="text-align:center">
+        查询时间段选择器
+    </div>
+    <div class="layui-row layui-col-space20">
+        <div class="layui-col-md4">
+            <p style="text-align:center">开始时间</p>
+            <input type="text" class="layui-input" id="startTime">
+        </div>
+        <div class="layui-col-md4">
+            <p style="text-align:center">结束时间</p>
+            <input type="text" class="layui-input" id="endTime">
+        </div>
+        <div class="layui-col-md4">
+            <p><br></p>
+            <button  class="layui-btn">查询</button>
+        </div>
+    </div>
+</div>
+<br>
+
+<!--总体统计模块:总体数目表格-->
+<div class="layui-col-md8" th:fragment="totalStatic">
+    <table class="layui-table">
+        <colgroup>
+            <col width="50">
+            <col width="60">
+            <col>
+        </colgroup>
+        <thead>
+            <tr>
+                <td>统计条目</td>
+                <td>数量</td>
+            </tr>
+        </thead>
+        <tbody>
+<!--            <tr th:each="emp:${totalStatics}">-->
+<!--                <td th:text="${emp.name}"></td>-->
+<!--                <td th:text="${emp.amount}"></td>-->
+<!--            </tr>-->
+            <tr>
+                <td th:text="设备总数"></td>
+                <td th:text="100"></td>
+            </tr>
+            <tr>
+                <td th:text="工厂总数"></td>
+                <td th:text="10"></td>
+            </tr>
+            <tr>
+                <td th:text="报警总数"></td>
+                <td th:text="40"></td>
+            </tr>
+            <tr>
+                <td th:text="故障总数"></td>
+                <td th:text="20"></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br>
+
+<!--总体统计模块：下级区域信息显示-->
+<div class="layui-col-md8" th:fragment="nextLevelAreaStaticInfo">
+    <table id="nextLevelAreaStaticInfo" lay-filter="test"></table>
+</div>
+
+<!--危险设备统计模块-->
+<div class="layui-col-md8" th:fragment="alarmDangerDevice">
+    <table id="alarmDangerDevice" lay-filter="test"></table>
+</div>
+
+<!--报警排汗-->
+<div class="layui-col-md12" th:fragment="alarmRank">
+    <div id="alarmRank" ></div>
+</div>
+
+
+
+<!--报警趋势图-->
+<div class="layui-col-md12" th:fragment="alarmTrend">
+    <div id="alarmTrend" ></div>
+</div>
+
+<!--全局地图-->
+<div class="layui-col-md12" th:fragment="safetySupervisorMap">
+    <div id="safetySupervisorMap" sec:width="100%" sec:height="100%"></div>
+</div>
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/highcharts.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/exporting.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/series-label.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/oldie.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/themes/dark-unica.js}"></script>
+<script th:src="@{/js/deviceDynamic/tools.js}"></script>
+
+
+</body>
+</html>

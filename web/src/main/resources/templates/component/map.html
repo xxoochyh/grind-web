@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>行政区浏览</title>
+<!--    <link rel="stylesheet" type="text/css" href="//webapi.amap.com/ui/1.1/ui/geo/DistrictExplorer/examples//area.css">-->
+<!--    <link rel="stylesheet" type="text/css" href="//webapi.amap.com/ui/1.1/ui/misc/MarkerList/examples/index.css">-->
+<!--    <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css">-->
+    <link th:href="@{/webjars/layui/2.5.6/css/layui.css}" rel="stylesheet"/>
+    <link th:href="@{/css/maps.css}" rel="stylesheet"/>
+    <script th:inline="javascript">
+        function getLowerAreaInfo(){
+            var lowerAreaInfo=[[${lowerAreaInfo}]];
+            return lowerAreaInfo;
+        }
+        function getFactoryStaticInfo(){
+            var factoryStaticInfo=[[${factoryStaticInfo}]];
+            return factoryStaticInfo;
+        }
+    </script>
+</head>
+
+<body >
+<div id="outer-box" >
+        <div class="map-container">
+            <div id="container" tabindex="0" ></div>
+
+            <!--图例部分-->
+            <div class="map-legend">
+                <div>
+                    <div style="text-align: center;font-size: 14px">区域统计图例</div>
+                    <div>
+                        <table class="layui-table" lay-skin="nob" lay-size="sm">
+<!--                            <colgroup>-->
+<!--                                <col width="50">-->
+<!--                                <col width="100">-->
+<!--                                <col>-->
+<!--                            </colgroup>-->
+                            <thead>
+                            <tr>
+                                <td style="font-size:13px">颜色</td>
+                                <td style="font-size:13px">数量</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td style="background-color: #e60000"></td>
+                                <td>50--</td>
+
+                            </tr>
+                            <tr>
+                                <td style="background-color: #d62728"></td>
+                                <td>30-49</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #f44e50"></td>
+                                <td>20-39</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: coral"></td>
+                                <td>10-19</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: pink"></td>
+                                <td>1-9</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: limegreen"></td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #666666"></td>
+                                <td style="font-size: 10px">该区域无设备</td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div>
+                    <div style="text-align: center;font-size: 14px">点标记图例</div>
+                    <div>
+                        <table class="layui-table" lay-skin="nob" lay-size="sm">
+                            <thead>
+                            <tr>
+                                <td style="font-size:13px">颜色</td>
+                                <td style="font-size:13px">数量</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="background-color: #e60000"></td>
+                                    <td>50--</td>
+
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #d62728"></td>
+                                    <td>30-49</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #f44e50"></td>
+                                    <td>20-39</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: coral"></td>
+                                    <td>10-19</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: pink"></td>
+                                    <td>1-9</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: limegreen"></td>
+                                    <td>0</td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: orange"></td>
+                                    <td style="font-size: 10px">有故障设备</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            <!--查看时间选择器-->
+            <div  class="time-selector ">
+                    <div style="height:40%;text-align: center;font-size: 16px">
+                        查询时间段选择器
+                    </div>
+                    <div style="height:60%">
+                        <form class="time-selector-detail">
+                            <label for="startTime">开始时间：</label>
+                            <input type="text"  id="startTime">
+                            <label for="endTime">结束时间：</label>
+                            <input type="text"   id="endTime">
+                            <button >查询</button>
+                        </form>
+                    </div>
+            </div>
+
+            <!--总体统计模块:总体数目表格-->
+            <div class="total-amount-table" >
+                <table class="layui-table">
+                    <colgroup>
+                        <col width="100">
+                        <col width="100">
+                        <col>
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <td>统计条目</td>
+                        <td>数量</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--            <tr th:each="emp:${totalStatics}">-->
+                    <!--                <td th:text="${emp.name}"></td>-->
+                    <!--                <td th:text="${emp.amount}"></td>-->
+                    <!--            </tr>-->
+                    <tr>
+                        <td th:text="设备总数"></td>
+                        <td th:text="100"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="工厂总数"></td>
+                        <td th:text="10"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="报警总数"></td>
+                        <td th:text="40"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="故障总数"></td>
+                        <td th:text="20"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--地图标点的数据类型选择-->
+            <ul id="btnList">
+                <li>
+                    <input value="全部数据" type="button" data-path="//a.amap.com/amap-ui/static/data/restaurant.json" />
+                </li>
+                <li>
+                    <input value="报警工厂排汗" type="button" data-path="//a.amap.com/amap-ui/static/data/hotel.json" />
+                </li>
+                <li>
+                    <input value="危险设备" type="button" data-path="//a.amap.com/amap-ui/static/data/hotel.json" />
+                </li>
+                <li>
+                    <input value="选中第一个" type="button" data-enable='markerList.getData().length>0' data-eval='markerList.selectByDataIndex(0)' />
+                </li>
+                <li>
+                    <input value="选中最后一个" type="button" data-enable='markerList.getData().length>0' data-eval='markerList.selectByDataReverseIndex(0)' />
+                </li>
+                <li>
+                    <input value="清除选中" type="button" data-enable='!!markerList.getSelectedDataId()' data-eval='markerList.clearSelected()' />
+                </li>
+                <li>
+                    <input value="清除数据" type="button" data-enable='markerList.getData().length>0' data-eval='markerList.clearData()' />
+                </li>
+            </ul>
+
+            <!--地图弹出框按钮-->
+            <div class="popup-menu">
+                <div>
+                    <button onclick="getCurrentAreaNode()" >详细统计信息</button>=
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+    <div class="panel-detail">
+        <div id="panel"  style="position: fixed;  overflow: scroll; height: 50%">
+            <div id="areaInfo" >
+                请用鼠标在地图上操作
+                <ul id="area-tree" >S
+                </ul>
+            </div>
+
+            <div id="point-list"  style="position: fixed; overflow: scroll; height: 50%; top: 50%; width: 100%">
+                <ul id="myList">
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    
+
+</div>
+<script type="text/javascript" src='//webapi.amap.com/maps?v=2.0&key=4a4ebbbb6e0b3af9aab0959f2b057381'></script>
+<!-- UI组件库 1.0 -->
+<script src="//webapi.amap.com/ui/1.1/main.js?v=1.1.1"></script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript" src="//webapi.amap.com/demos/js/liteToolbar.js?v=1.0.11"></script>
+
+<script type="text/javascript" th:src="@{/js/deviceDynamic/map.js}"></script>
+
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/highcharts.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/exporting.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/series-label.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/oldie.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/themes/dark-unica.js}"></script>
+<script>
+    layui.use(['laydate','layer'], function(){
+        var layer = layui.layer;
+        var laydate = layui.laydate;
+        var date = new Date();
+        var lastWeek = new Date(date.getTime()-7*24*60*60*1000);
+// 时间段选择器
+
+
+//执行一个laydate实例, 开始时间选择
+        laydate.render({
+            elem: '#startTime'  //指定元素
+            , type: 'date'
+            // range: true,
+            , format: 'yyyy年MM月dd日'
+            , value: lastWeek
+            , isInitValue: true
+            , max: 0
+            , show: true
+            , lang: 'cn'
+            , ready: function (date) {
+                console.log(date)
+            }
+            , change: function (value, date, endDate) {
+                console.log(value);
+                console.log(date);
+                console.log(endDate);
+                insl.hint(value);
+            }
+        });
+
+//执行一个laydate实例， 结束时间选择
+        laydate.render({
+            elem: '#endTime' //指定元素
+            , type: 'date'
+            // range: true,
+            , format: 'yyyy年MM月dd日'  //指定日期格式
+            , value: date  //指定初始选择的值
+            , isInitValue: true  //是否可以进行初始选择
+            , max: 0   //最大可选择日期
+            , show: true  //是否显示
+            , lang: 'cn'
+            , ready: function (date) {
+                console.log(date)
+            }
+            , change: function (value, date, endDate) {
+                console.log(value);
+                console.log(date);
+                console.log(endDate);
+
+            }
+        });
+    });
+    function getCurrentAreaNode(){
+        console.log(currentAreaNode.getAdcode());
+        console.log(currentAreaNode.getName());
+
+
+
+            layer.open({
+                type: 2,
+                title: '统计信息',
+                content: '/AreaStaticInfo',
+                skin: 'layui-layer-lan',
+                area: ['600px', '500px'],
+                maxmin: true,
+                closeBtn: 1,
+            });
+
+
+    }
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,10 @@
+.map-detail{
+    float: left;
+    width: 80%;
+    background-color: #00C0F7;
+}
+
+.time-selector{
+    height: 60px;
+    background-color: #4E5465;
+}

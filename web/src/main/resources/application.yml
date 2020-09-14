@@ -1,0 +1,63 @@
+#server:
+#  port: 8081
+#
+#person:
+#  lastName: 李四1
+#  age: 18
+#  boss: false
+#  birth: 2020/7/27
+#  maps: {k1: v1, k2: v2}
+#  lists:
+#    - 张三
+#    - zhouhua
+#  dog:
+#    name: 小狗
+#    age: 12
+#
+spring:
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://localhost:3306/user?characterEncoding=utf-8&serverTimezone=GMT%2B8
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+#mybatis配置
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.stack.mapper.entity
+  configuration:
+    map-underscore-to-camel-case: true
+
+
+#通用mapper配置
+mapper:
+  mapper: com.stack.mapper.baseDao.IBaseDao
+  identity: MYSQL
+    #   数据源其他配置
+#    initialSize: 5
+#    minIdle: 5
+#    maxActive: 20
+#    maxWait: 60000
+#    timeBetweenEvictionRunsMillis: 60000
+#    minEvictableIdleTimeMillis: 300000
+#    validationQuery: SELECT 1 FROM DUAL
+#    testWhileIdle: true
+#    testOnBorrow: false
+#    testOnReturn: false
+#    poolPreparedStatements: true
+#    #   配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+#    filters: stat,wall,log4j
+#    maxPoolPreparedStatementPerConnectionSize: 20
+#    useGlobalDataSourceStat: true
+#    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
+
+jdbc:
+  driverClassName: com.mysql.jdbc.Driver
+  username: root
+  password: root
+  url: jdbc:mysql://localhost:3306/user
+
+
+

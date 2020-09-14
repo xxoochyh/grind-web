@@ -1,0 +1,38 @@
+.news_search{ padding:10px 10px; }
+.news_list .layui-form-switch{ margin-top:0; }
+.childrenBody {margin: 10px 10px 0}
+
+/****
+修改原始样式
+ */
+
+.layui-table-cell .layui-form-checkbox[lay-skin=primary]{top:5px!important;}
+
+/*分页*/
+/*#page{ text-align:right; }*/
+
+/**
+导航树样式
+**/
+
+.downpanel .layui-select-title span {
+    line-height: 38px;
+}
+
+/*继承父类颜色*/
+.downpanel dl dd:hover {
+    background-color: inherit;
+}
+td {
+    font-size: 12px !important;
+}
+
+.layui-form-checkbox span {
+    height: 30px;
+}
+.layui-field-title {
+    border-top: 1px solid white;
+}
+table {
+    width: 100% !important;
+}

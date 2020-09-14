@@ -1,0 +1,99 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>查看故障详情</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/font_tnyc012u2rlwstt9.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all"/>
+</head>
+<body>
+<div class="layui-card">
+    <div class="layui-card-body" style="padding: 20px 50px 20px 20px;">
+        <form class="layui-form" lay-filter="accountForm">
+            <div>
+                <input id="faultId" name="faultId" type="hidden" th:value="${fault.faultId}">
+                <input id="factoryId" name="factoryId" type="hidden" th:value="${fault.factoryId}">
+                <input id="gridId" name="gridId" type="hidden" th:value="${fault.gridId}">
+                <input id="deviceId" name="deviceId" type="hidden" class="layui-input" th:value="${fault.deviceId}">
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">故障发生时间</label>
+                <div class="layui-input-block">
+                    <input id="faultTime" name="faultTime" type="text" class="layui-input" lay-verify="faultTime"
+                           disabled="disabled" autocomplete="off" th:value="${fault.faultTime}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">故障类型</label>
+                <div class="layui-input-block">
+                    <input id="faultTypeDesc" name="faultTypeDesc" type="text" class="layui-input"
+                           lay-verify="faultTypeDesc"
+                           disabled="disabled" autocomplete="off" th:value="${fault.faultTypeDesc}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属设备序列号</label>
+                <div class="layui-input-block">
+                    <input id="serial" name="serial" type="text" class="layui-input" lay-verify="serial"
+                           disabled="disabled" autocomplete="off" th:value="${fault.serial}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属设备型号</label>
+                <div class="layui-input-block">
+                    <input id="model" name="model" type="text" class="layui-input" lay-verify="model"
+                           disabled="disabled" autocomplete="off" th:value="${fault.model}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">所属设备类型</label>
+                <div class="layui-input-block">
+                    <input id="typeName" name="typeName" type="text" class="layui-input" lay-verify="typeName"
+                           disabled="disabled" autocomplete="off" th:value="${fault.typeName}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否确认</label>
+                <div class="layui-input-block">
+                    <input id="isConfirmed" name="isConfirmed" type="text" class="layui-input" lay-verify="isConfirmed"
+                           disabled="disabled" autocomplete="off" th:value="${fault.isConfirmed==1?'已确认':'未确认'}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input id="note" name="note" type="text" class="layui-input" lay-verify="note"
+                           disabled="disabled" autocomplete="off" th:value="${fault.note}">
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+</body>
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/fault/faultDetail.js}"></script>
+
+<script th:inline="javascript">
+    function getIsConfirmed() {
+        console.log([[${fault.isConfirmed}]]);
+        return [[${fault.isConfirmed}]];
+    }
+</script>
+</html>

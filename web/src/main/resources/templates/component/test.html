@@ -1,0 +1,58 @@
+<!-- MarkerList完整示例 -->
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <!-- 原始地址：//webapi.amap.com/ui/1.1/ui/misc/MarkerList/examples/index.html -->
+<!--    <base href="//webapi.amap.com/ui/1.1/ui/misc/MarkerList/examples/" />-->
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <title>完整示例</title>
+    <link rel="stylesheet" type="text/css" href="//webapi.amap.com/ui/1.1/ui/misc/MarkerList/examples/index.css">
+    <link th:href="@{/webjars/layui/2.5.6/css/layui.css}" rel="stylesheet"/>
+    <script th:inline="javascript">
+        function getFactoryStaticInfo(){
+            var factoryStaticInfo=[[${factoryStaticInfo}]];
+            return factoryStaticInfo;
+        }
+    </script>
+</head>
+
+<body>
+<div id="outer-box">
+    <div id="container" tabindex="0"></div>
+    <div id="point-list" class="scrollbar1">
+        <ul id="myList">
+        </ul>
+    </div>
+    <ul id="btnList">
+        <li>
+            <input value="美食数据" type="button" data-path="//a.amap.com/amap-ui/static/data/restaurant.json" />
+        </li>
+        <li>
+            <input value="酒店数据" type="button" data-path="//a.amap.com/amap-ui/static/data/hotel.json" />
+        </li>
+        <li>
+            <input value="选中第一个" type="button" data-enable='markerList.getData().length>0' data-eval='markerList.selectByDataIndex(0)' />
+        </li>
+        <li>
+            <input value="选中最后一个" type="button" data-enable='markerList.getData().length>0' data-eval='markerList.selectByDataReverseIndex(0)' />
+        </li>
+        <li>
+            <input value="清除选中" type="button" data-enable='!!markerList.getSelectedDataId()' data-eval='markerList.clearSelected()' />
+        </li>
+        <li>
+            <input value="清除数据" type="button" data-enable='markerList.getData().length>0' data-eval='markerList.clearData()' />
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src='//webapi.amap.com/maps?v=2.0&key=4a4ebbbb6e0b3af9aab0959f2b057381'></script>
+<!-- UI组件库 1.0 -->
+<script src="//webapi.amap.com/ui/1.1/main.js?v=1.1.1"></script>
+<script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+<script type="text/javascript" src="//webapi.amap.com/demos/js/liteToolbar.js?v=1.0.11"></script>
+<script type="text/javascript" th:src="@{/js/deviceDynamic/test.js}"></script>
+</body>
+
+</html>

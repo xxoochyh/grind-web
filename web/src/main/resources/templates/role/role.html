@@ -1,0 +1,113 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>角色管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/font_tnyc012u2rlwstt9.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all" />
+
+</head>
+<body class="childrenBody">
+
+<blockquote class="layui-elem-quote" style="margin-top:20px;"><h1>角色管理&nbsp;</h1></blockquote>
+
+<blockquote class="layui-elem-quote news_search">
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <input type="text" value="" placeholder="请输入关键字" class="layui-input search_input">
+        </div>
+        <a class="layui-btn search_btn">查询</a>
+    </div>
+    <div class="layui-inline">
+        <a id="createRole_btn" class="layui-btn layui-btn-normal">创建角色</a>
+    </div>
+</blockquote>
+
+
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md3">
+            <div class="layui-card">
+                <div class="layui-card-header">角色列表</div>
+
+                <div class="layui-card-body">
+                    <!--左侧角色树-->
+                    <ul id="roleTree" class="roleTree">
+                    </ul>
+                    <div class="layui-col-md2 layui-col-xs6 layui-col-sm2">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md9">
+            <div class="layui-card">
+                <div class="layui-card-header">角色信息</div>
+
+                <div class="layui-card-body">
+                    <table id="roleTable" lay-filter="roleTable">
+                    </table>
+                    <div class="layui-col-md9">
+
+                    </div>
+                </div>
+            </div>
+            <div class="layui-card">
+                <div class="layui-card-header">权限信息</div>
+
+                <div class="layui-card-body">
+                    <!--右侧具体内容-->
+                    <!--右侧权限信息-->
+                    <table id="permissionTable" lay-filter="permissionTable">
+                    </table>
+                    <div class="layui-col-md9">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/role/role.js}"></script>
+
+<!--编辑页面-->
+<script type="text/html" id="roleBar">
+    <a class="layui-btn layui-btn-xs" lay-event="editRole">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delRole">删除</a>
+</script>
+
+<script type="text/html" id="permissionBar">
+    <a class="layui-btn layui-btn-xs" lay-event="editNote">修改备注</a>
+</script>
+
+<script type="text/html" id="roleSwitch">
+    <form> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+        <div>
+            <input type="checkbox" name="status" value="{{d.status}}" lay-skin="switch" lay-text="开启|禁用" lay-filter="roleStatus" {{ d.status == 1 ? 'checked':'' }} />
+        </div>
+    </form>
+</script>
+
+<script type="text/html" id="permissionSwitch">
+    <form> <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+        <div>
+            <input type="checkbox" name="status" value="{{d.status}}" lay-skin="switch" lay-text="开启|禁用" lay-filter="permissionStatus" {{ d.status == 1 ? 'checked':'' }} />
+        </div>
+    </form>
+</script>
+
+</body>
+</html>

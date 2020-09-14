@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>添加设备</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all"/>
+</head>
+<body class="childrenBody">
+<input type="hidden" id="selectedId" name="selectedId" value=""/>
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备编号</label>
+        <div class="layui-input-block">
+            <input id="serial" name="serial" type="text" class="layui-input" lay-verify="serial" placeholder="请输入设备编号"
+                   autocomplete="off">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备型号</label>
+        <div class="layui-input-block">
+            <input id="model" name="model" type="text" class="layui-input" lay-verify="model" placeholder="请输入设备型号"
+                   autocomplete="off">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">设备类型</label>
+        <div class="layui-input-block">
+            <select lay-verify="required" id="type" name="type">
+                <option value="1" selected>干式设备</option>
+                <option value="0">湿式设备</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">所在地址</label>
+        <div class="layui-input-block">
+            <input id="address" name="address" type="text" class="layui-input" lay-verify="address"
+                   placeholder="请输入所在地址" autocomplete="off">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">工厂名称</label>
+        <div class="layui-input-block">
+            <select id="factoryId" name="factoryId" lay-verify="factoryId" autocomplete="off" lay-filter="selectType"
+                    lay-search>
+                <text th:each="factory:${factoryList}">
+                    <option th:text="${factory.factoryName}" th:value="${factory.factoryId}"></option>
+                </text>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit="createDevice" lay-filter="createDevice">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+
+</form>
+</body>
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/device/createDevice.js}"></script>
+</html>

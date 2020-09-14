@@ -1,0 +1,75 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>编辑工厂</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/font_tnyc012u2rlwstt9.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all"/>
+</head>
+<body>
+<div class="layui-card">
+    <div class="layui-card-body" style="padding: 20px 50px 20px 20px;">
+        <form class="layui-form" lay-filter="accountForm">
+            <!--隐藏ID-->
+            <div class="layui-form-item">
+                <input type="hidden" id="factoryId" name="factoryId" th:value="${factory.factoryId}">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工厂名称</label>
+                <div class="layui-input-block">
+                    <input id="factoryName" name="factoryName" type="text" class="layui-input" lay-verify="factoryName"
+                           autocomplete="off" th:value="${factory.factoryName}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">负责人</label>
+                <div class="layui-input-block">
+                    <input id="principalName" name="principalName" type="text" class="layui-input"
+                           lay-verify="principalName" autocomplete="off"
+                           th:value="${factory.principalName}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">负责人电话</label>
+                <div class="layui-input-block">
+                    <input id="principalPhone" name="principalPhone" type="text" class="layui-input"
+                           lay-verify="principalPhone" autocomplete="off" th:value="${factory.principalPhone}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工厂详细地址</label>
+                <div class="layui-input-block">
+                    <input id="address" name="address" type="text" class="layui-input" lay-verify="address"
+                           autocomplete="off" th:value="${factory.address}">
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <input id="note" name="note" type="text" class="layui-input" lay-verify="note"
+                           autocomplete="off" th:value="${factory.note}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="updateFactory" lay-filter="updateFactory">确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/grid/updateFactory.js}"></script>
+</html>

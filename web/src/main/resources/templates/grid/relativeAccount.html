@@ -1,0 +1,39 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户网格关联</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+</head>
+<body>
+
+<div class="layui-form-item">
+    <input type="hidden" id="id" name="id" th:value="${id}">
+</div>
+
+<div class="layui-card">
+
+    <div class="layui-card-body" style="padding: 10px 40px 10px 50px;">
+
+        <div id="accountTransfer"></div>
+
+    </div>
+</div>
+
+</body>
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/grid/relativeAccount.js}"></script>
+
+<script>
+
+</script>
+</html>

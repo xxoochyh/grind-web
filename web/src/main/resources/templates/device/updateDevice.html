@@ -1,0 +1,114 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>编辑设备</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/font_tnyc012u2rlwstt9.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all"/>
+</head>
+<body>
+<div class="layui-card">
+    <div class="layui-card-body" style="padding: 20px 50px 20px 20px;">
+        <form class="layui-form" lay-filter="accountForm">
+            <!--隐藏ID-->
+            <div class="layui-form-item">
+                <input type="hidden" id="deviceId" name="deviceId" th:value="${device.deviceId}">
+            </div>
+            <div>
+                <input type="hidden" id="deviceType" name="deviceType" th:value="${device.type}">
+                <input type="hidden" id="deviceFactory" name="deviceFactory" th:value="${device.factoryId}">
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备编号</label>
+                <div class="layui-input-block">
+                    <input id="serial" name="serial" type="text" class="layui-input" lay-verify="serial"
+                           autocomplete="off" th:value="${device.serial}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备编号</label>
+                <div class="layui-input-block">
+                    <input id="model" name="model" type="text" class="layui-input" lay-verify="model" autocomplete="off"
+                           th:value="${device.model}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备类型</label>
+                <div class="layui-input-block">
+                    <select id="type" name="type" th:value="${device.type}">
+                        <option value="0">干式设备</option>
+                        <option value="1">湿式设备</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备所在地区</label>
+                <div class="layui-input-block">
+                    <input id="district" name="district" type="text" class="layui-input" lay-verify="district"
+                           disabled="disabled" autocomplete="off" th:value="${device.province+
+                           ' '+device.city+' '+device.district}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备详细地址</label>
+                <div class="layui-input-block">
+                    <input id="address" name="address" type="text" class="layui-input" lay-verify="address"
+                           autocomplete="off" th:value="${device.address}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">工厂名称</label>
+                <div class="layui-input-block">
+                    <select id="factoryId" name="factoryId" lay-verify="factoryId" autocomplete="off"
+                            th:value="${device.factoryId}"
+                            lay-filter="selectType" lay-search>
+                        <text th:each="factorys:${factory}">
+                            <option th:text="${factorys.factoryName}" th:value="${factorys.factoryId}"></option>
+                        </text>
+                    </select>
+                </div>
+            </div>
+
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备创建时间</label>
+                <div class="layui-input-block">
+                    <input id="createTime" name="createTime" type="text" class="layui-input" lay-verify="creatTime"
+                           disabled="disabled"
+                           autocomplete="off" th:value="${device.createTime}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">设备上一次修改时间</label>
+                <div class="layui-input-block">
+                    <input id="updateTime" name="updateTime" type="text" class="layui-input" lay-verify="updateTime"
+                           disabled="disabled"
+                           autocomplete="off" th:value="${device.updateTime}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit="updateDevice" lay-filter="updateDevice">确认修改</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<script th:src="@{/js/device/updateDevice.js}"></script>
+<script>
+    console.log($("#deviceType").val()+" type");
+    $("#type").find("option[value=" + $('#deviceType').val() + "]").prop("selected", true);
+    $("#factoryId").find("option[value=" + $('#deviceFactory').val() + "]").prop("selected", true);
+</script>
+</html>

@@ -1,0 +1,88 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>设备统计信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all" />
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all" />
+    <script th:src="@{/webjars/highcharts/7.1.1/highcharts.js}"></script>
+    <script th:src="@{/webjars/highcharts/7.1.1/modules/no-data-to-display.js}"></script>
+    <script th:src="@{/webjars/highcharts/7.1.1/modules/exporting.js}"></script>
+    <script th:src="@{/webjars/highcharts/7.1.1/modules/series-label.js}"></script>
+    <script th:src="@{/webjars/highcharts/7.1.1/modules/oldie.js}"></script>
+    <script th:src="@{/webjars/highcharts/7.1.1/modules/exporting.js}"></script>
+</head>
+<body class="childrenBody">
+
+<input type="hidden" id="deviceId" name="deviceId" th:value="${deviceId}" />
+
+<div class="layui-tab" lay-filter="dynamicInfo">
+    <ul class="layui-tab-title">
+        <li data-type="100" class="layui-this">警报数据</li>
+        <li data-type="200">故障数据</li>
+        <li data-type="1">卸灰器故障</li>
+        <li data-type="2">清灰气压</li>
+        <li data-type="3">(干式)粉尘排放浓度</li>
+        <li data-type="4">烟感探测</li>
+        <li data-type="5">火花探测</li>
+        <li data-type="6">温度</li>
+        <li data-type="7">（风）压差</li>
+        <li data-type="8">(湿式)粉尘排放浓度</li>
+        <li data-type="9">水压压差</li>
+        <li data-type="10">氢气浓度</li>
+        <li data-type="11">进出口压差</li>
+        <li data-type="12">液位</li>
+    </ul>
+    <div class="layui-tab-content">
+        <div class="layui-tab-item layui-show">警报数据(红色代表未确认 蓝色代表确认)</div>
+        <div class="layui-tab-item ">故障数据(红色代表未确认 蓝色代表确认)</div>
+        <div class="layui-tab-item">卸灰器故障</div>
+        <div class="layui-tab-item">清灰气压</div>
+        <div class="layui-tab-item">(干式)粉尘排放浓度</div>
+        <div class="layui-tab-item">烟感探测</div>
+        <div class="layui-tab-item">火花探测</div>
+        <div class="layui-tab-item">温度</div>
+        <div class="layui-tab-item">风）压差</div>
+        <div class="layui-tab-item">(湿式)粉尘排放浓度</div>
+        <div class="layui-tab-item">水压压差</div>
+        <div class="layui-tab-item">氢气浓度</div>
+        <div class="layui-tab-item">进出口压差</div>
+        <div class="layui-tab-item">液位</div>
+    </div>
+    <div style="padding: 20px; background-color: #F2F2F2;">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md9">
+                <div class="layui-card">
+                    <div class="layui-card-body" id="container" style="max-width:800px;height:400px"></div>
+                </div>
+            </div>
+            <div class="layui-col-md3">
+                <div class="layui-card">
+                    <div class="layui-card-header">详细信息</div>
+
+                    <div class="layui-card-body">
+                        <table id="alarmDetailTable" lay-data="{id: 'alarmDetailTable'}" lay-filter="alarmDetailTable">
+                        </table>
+                        <table id="faultDetailTable" lay-data="{id: 'faultDetailTable'}" lay-filter="faultDetailTable">
+                        </table>
+                        <table id="sensorDetailTable" lay-data="{id: 'sensorDetailTable'}" lay-filter="sensorDetailTable">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/layui/2.5.6/lay/modules/jquery.js}"></script>
+<script th:src="@{/js/common/common.js}"></script>
+<<script th:src="@{/js/deviceDynamic/dynamicInfo.js}"></script>
+</html>

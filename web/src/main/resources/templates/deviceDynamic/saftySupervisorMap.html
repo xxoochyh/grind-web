@@ -1,0 +1,82 @@
+
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://mybatis.org"
+       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <title>安监员地图</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/saftySupervisorMap.css}" media="all"/>
+</head>
+<body>
+    <!--安监员顶部监控模块导航选项-->
+    <div>
+        <ul class="layui-nav">
+            <li class="layui-nav-item layui-this"><a th:href="404.html">总体统计</a></li>
+            <li class="layui-nav-item"><a href="">报警排行</a></li>
+            <li class="layui-nav-item"><a href="">报警趋势</a></li>
+            <li class="layui-nav-item"><a>危险设备</a></li>
+        </ul>
+    </div>
+    <!--安监员具体统计信息显示区域-->
+    <div>
+        <span >
+            <!--全局地图显示区域-->
+            <div class="map-detail">
+                <p>全局地图</p>
+            </div>
+            <!--显示时间段选择区域-->
+            <div class="map-detail time-selector layui-inline">
+                <p>显示时间段选择</p>
+                <input type="text" class="layui-input" id="startTime">
+            </div>
+            <!--选中的地图行政区块信息显示区域-->
+            <div>
+                <p>选中区域信息显示</p>
+            </div>
+        </span>
+        <!--统计图表显示区域-->
+        <span>
+            <div>
+                <p>统计图表显示</p>
+            </div>
+        </span>
+    </div>
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script>
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#startTime', //指定元素
+            type: 'date',
+            // range: true,
+            format: 'yyyy年MM月dd日',
+            value: new Date(),
+            isInitValue: true,
+            max: 0,
+            show: true,
+            lang: 'cn',
+            ready: function(date){
+                console.log(date)
+            },
+            change: function(value, date, endDate){
+                console.log(value);
+                console.log(date);
+                console.log(endDate);
+                insl.hint(value);
+            }
+        });
+    });
+</script>
+</body>
+</html>

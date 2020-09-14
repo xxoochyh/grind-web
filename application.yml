@@ -1,0 +1,15 @@
+#server:
+#  port: 8083333
+#
+#person:
+#  lastName: 李四33
+#  age: 18
+#  boss: false
+#  birth: 2020/7/27
+#  maps: {k1: v1, k2: v2}
+#  lists:
+#    - 张三
+#    - zhouhua
+#  dog:
+#    name: 小狗
+#    age: 12

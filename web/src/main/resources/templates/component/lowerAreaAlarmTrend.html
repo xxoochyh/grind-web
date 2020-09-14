@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml"
+       xmlns:th="http://mybatis.org"
+       xmlns:sec="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>下一级区域报警趋势</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+
+</head>
+<body>
+    <div class="layui-col-md12" >
+        <div id="alarmTrend" ></div>
+    </div>
+
+
+<script th:src="@{/webjars/layui/2.5.6/layui.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/highcharts.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/exporting.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/series-label.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/modules/oldie.js}"></script>
+<script th:src="@{/webjars/highcharts/7.1.1/themes/dark-unica.js}"></script>
+<script>
+    //报警趋势
+    var alarmTrendChart = Highcharts.chart('alarmTrend', {
+        title: {
+            text: '报警趋势统计'
+        },
+        subtitle: {
+            text: '数据来源：grind系统'
+        },
+        yAxis: {
+            title: {
+                text: '报警次数'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle'
+        },
+        plotOptions: {
+            series: {
+                label: {
+                    connectorAllowed: false
+                },
+                pointStart: 2010
+            }
+        },
+        series: [//['昆明市','开远市','曲靖市','大理市','西双版纳']
+            {name: '昆明市', data: [34, 3, 77, 58, 31, 93, 137, 75]
+            },
+            {name: '开远市', data: [49, 24, 97, 51, 390, 30, 21, 40]
+            },
+            {name: '曲靖市',data: [11, 77, 16, 171, 20, 77, 32, 39]
+            },
+            {name: '大理市', data: [null, null, 79, 69, 12, 52, 34, 327]
+            },
+            {name: '西双版纳', data: [8, 59, 81, 11, 9, 81, 74, 11]
+            }
+        ],
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    legend: {
+                        layout: 'horizontal',
+                        align: 'center',
+                        verticalAlign: 'bottom'
+                    }
+                }
+            }]
+        }
+    });
+</script>
+</body>
+</html>

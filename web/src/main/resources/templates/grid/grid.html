@@ -1,0 +1,93 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>网格管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" th:href="@{/webjars/layui/2.5.6/css/layui.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/font_tnyc012u2rlwstt9.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/news.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/zTreeStyle.css}" media="all"/>
+    <link rel="stylesheet" th:href="@{/css/demo.css}" media="all"/>
+    <script src="/webjars/layui/2.5.6/layui.js"></script>
+    <script src="/webjars/layui/2.5.6/lay/modules/jquery.js"></script>
+    <script th:src="@{/js/grid/jquery.js}"></script>
+    <script th:src="@{/js/grid/jquery.ztree.all.js}"></script>
+    <script th:src="@{/js/grid/gridding.js}"></script>
+</head>
+
+<body class="childrenBody">
+<blockquote class="layui-elem-quote" style="margin-top:20px;"><h1>网格管理</h1></blockquote>
+<!--网格管理-->
+<blockquote class="layui-elem-quote news_search">
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <input type="text" id="keyword" value="" placeholder="请输入关键字" class="layui-input search_input">
+        </div>
+        <a class="layui-btn search_btn">查询</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-normal gridAdd_btn">添加网格</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-danger factoryAdd_btn" lay-event="addFactory">添加工厂</a>
+    </div>
+    <div class="layui-inline">
+        <a class="layui-btn layui-btn-normal relativeAccount_btn">关联用户</a>
+    </div>
+</blockquote>
+
+<div style="padding: 20px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-row">
+            <!--左侧角色树-->
+            <div class="layui-col-md2 layui-col-xs6 layui-col-sm2">
+                <div class="layui-card">
+                    <div class="layui-card-body">
+                        <ul id="classTree" class="ztree">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!--右侧具体内容-->
+            <!--右侧权限信息-->
+            <div class="layui-col-md9 layui-col-xs6 layui-col-sm10 layui-col-md-offset1">
+                <div class="layui-card">
+                    <div class="layui-card-header">工厂和设备信息</div>
+                    <div class="layui-card-body">
+                        <table id="datatable" lay-filter="datatable">
+                        </table>
+                    </div>
+                </div>
+                <div class="layui-card">
+                    <div class="layui-card-header">关联用户信息</div>
+                    <div class="layui-card-body">
+                        <table id="userRelative" lay-filter="userRelative">
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:inline="javascript">
+    function getuserId() {
+        var userId = [[${userId}]];
+        return userId;
+    }
+</script>
+
+<!--编辑页面-->
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+</script>
+</html>
